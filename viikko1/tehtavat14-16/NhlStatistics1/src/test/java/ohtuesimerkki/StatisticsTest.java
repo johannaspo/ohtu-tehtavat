@@ -74,4 +74,5 @@ public class StatisticsTest {
         List<Player> top = stats.topScorers(6);
         assertEquals(5, top.size());
     }
+    
 }
