@@ -2,6 +2,7 @@ package ohtu;
 
 import com.google.gson.Gson;
 import java.io.IOException;
+import java.util.Arrays;
 import org.apache.http.client.fluent.Request;
 
 public class Main {
@@ -15,6 +16,8 @@ public class Main {
 
         Gson mapper = new Gson();
         Player[] players = mapper.fromJson(bodyText, Player[].class);
+        
+        Arrays.sort(players);
         
         System.out.println("Players from FIN:");
         for (Player player : players) {
