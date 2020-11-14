@@ -39,6 +39,7 @@ public class KauppaTest {
         // toistaiseksi ei välitetty kutsussa käytetyistä parametreista
     }
     
+    @Test
     public void ostoksenPaaytyttyaPankinMetodiaTilisiirtoKutsutaanOikeallaAsiakkaallaTilinumerollaJaSummalla() {
         // tehdään ostokset
         k.aloitaAsiointi();
@@ -50,6 +51,7 @@ public class KauppaTest {
         // toistaiseksi ei välitetty kutsussa käytetyistä parametreista
     }
     
+    @Test
     public void kahdenEriOstoksenJalkeenPankinMetodiaTilisiirtoKutsutaanOikeallaAsiakkaallaTilinumerollaJaSummalla() {
         when(varasto.saldo(2)).thenReturn(10); 
         when(varasto.haeTuote(2)).thenReturn(new Tuote(2, "kahvi", 6));
@@ -65,6 +67,7 @@ public class KauppaTest {
         // toistaiseksi ei välitetty kutsussa käytetyistä parametreista
     }
     
+    @Test
     public void kahdenSamanOstoksenJalkeenPankinMetodiaTilisiirtoKutsutaanOikeallaAsiakkaallaTilinumerollaJaSummalla() {
         // tehdään ostokset
         k.aloitaAsiointi();
@@ -77,6 +80,7 @@ public class KauppaTest {
         // toistaiseksi ei välitetty kutsussa käytetyistä parametreista
     }
     
+    @Test
     public void kahdenEriOstoksenJalkeenPankinMetodiaTilisiirtoKutsutaanOikeallaAsiakkaallaTilinumerollaJaSummallaKunToistaTuotettaEiOle() {
         when(varasto.saldo(2)).thenReturn(0); 
         when(varasto.haeTuote(2)).thenReturn(new Tuote(2, "kahvi", 6));
@@ -85,6 +89,56 @@ public class KauppaTest {
         k.aloitaAsiointi();
         k.lisaaKoriin(1); 
         k.lisaaKoriin(2);  // ostetaan tuotetta numero 1 eli maitoa
+        k.tilimaksu("pekka", "12345");
+
+        // sitten suoritetaan varmistus, että pankin metodia tilisiirto on kutsuttu
+        verify(pankki).tilisiirto("pekka", 42, "12345", "33333-44455",5);   
+        // toistaiseksi ei välitetty kutsussa käytetyistä parametreista
+    }
+    
+    @Test
+    public void aloitaAsiointiNollaaEdellisenOstoksenTiedot() {
+        
+        k.aloitaAsiointi();
+        k.lisaaKoriin(1);
+        k.aloitaAsiointi();
+        k.tilimaksu("pekka", "12345");
+
+        // sitten suoritetaan varmistus, että pankin metodia tilisiirto on kutsuttu
+        verify(pankki).tilisiirto("pekka", 42, "12345", "33333-44455",0);   
+        // toistaiseksi ei välitetty kutsussa käytetyistä parametreista
+    }
+    
+    @Test
+    public void pyydetaanUusiViiteJokaiseenMaksuun() {
+       
+        k.aloitaAsiointi();
+        k.lisaaKoriin(1);
+        k.tilimaksu("pekka", "12345");
+
+        verify(viite, times(1)).uusi();
+
+        k.aloitaAsiointi();
+        k.lisaaKoriin(1);
+        k.tilimaksu("pekka", "12345");
+
+        verify(viite, times(2)).uusi();
+
+        k.aloitaAsiointi();
+        k.lisaaKoriin(1);
+        k.tilimaksu("pekka", "12345");
+     
+        verify(viite, times(3)).uusi();
+        
+    }
+    
+    @Test
+    public void poistaKorista() {
+        
+        k.aloitaAsiointi();
+        k.lisaaKoriin(1);
+        k.poistaKorista(1);
+        k.lisaaKoriin(1);
         k.tilimaksu("pekka", "12345");
 
         // sitten suoritetaan varmistus, että pankin metodia tilisiirto on kutsuttu
