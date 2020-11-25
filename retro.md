@@ -1,0 +1,5 @@
+#Retrospektiivitekniikat
+
+"Start, Stop, Continue, More of, Less of Wheel" on nopea retrospektiivitekniikka, johon aikaa kuluu vain 10-25 minuuttia ryhmän koosta riippuen. Fasilitaattori johtaa keskustelua käyttäen apunaan palautepyörää. Pyörässä on viisi osiota, start, stop, continue, more of ja less of.  Tarkoituksena on keksiä pienryhmissä asioita, joita ei ole vielä tehty, mutta pitäisi tehdä, asioita, joita ei pitäisi enää tehdä, asioita, joita pitäisi tehdä enemmän, sekä asioita, jota pitäisi tehdä vähemmän. Jokainen ryhmä tekee oman versionsa, ja kaikki tutkivat tämän jälkeen rauhassa muiden pyöriä. Tutkimista seuraa keskustelu.
+
+“Glad, Sad, Mad” on edellistä hieman pidempi, mutta simppelimpi retrospektiivivaihtoehto. Tarkoituksena on käsitellä aiheita laajasti pikemmin kuin syvällisesti. Aluksi kerätään sprintin aikana kerääntyneitä ongelmia ja kehitysideoita kaikilta osallistujilta, ja tämän jälkeen jokainen niistä kategorisoidaan gladiksi, sadiksi tai madiksi. Osallistujat äänestävät siitä, mitä aiheita käsitellään, ja tämän jälkeen niistä keskustellaan äänimäärän määrittämässä järjestyksessä.
